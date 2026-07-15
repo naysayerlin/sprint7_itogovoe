@@ -64,9 +64,11 @@ func TestCafeCCount(t *testing.T) {
 		{count: 2, want: 2},
 		{count: 100, want: min(len(cafeList[city]), 100)},
 	}
+
 	for _, v := range requests {
 		response := httptest.NewRecorder()
-		req := httptest.NewRequest("GET", "/cafe?city="+city+"&count="+strconv.Itoa(v.count), nil)
+		req := httptest.NewRequest("GET",
+			"/cafe?city="+city+"&count="+strconv.Itoa(v.count), nil)
 		handler.ServeHTTP(response, req)
 		assert.Equal(t, http.StatusOK, response.Code)
 		body := strings.TrimSpace(response.Body.String())
