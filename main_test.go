@@ -54,7 +54,7 @@ func TestCafeWhenOk(t *testing.T) {
 
 func TestCafeCCount(t *testing.T) {
 	handler := http.HandlerFunc(mainHandle)
-	city := "tula"
+	city := "moscow"
 	requests := []struct {
 		count int
 		want  int
