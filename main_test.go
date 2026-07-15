@@ -67,8 +67,11 @@ func TestCafeCCount(t *testing.T) {
 
 	for _, v := range requests {
 		response := httptest.NewRecorder()
-		req := httptest.NewRequest("GET",
-			"/cafe?city="+city+"&count="+strconv.Itoa(v.count), nil)
+		req := httptest.NewRequest(
+			"GET",
+			"/cafe?city="+city+"&count="+strconv.Itoa(v.count),
+			nil,
+		)
 		handler.ServeHTTP(response, req)
 		assert.Equal(t, http.StatusOK, response.Code)
 		body := strings.TrimSpace(response.Body.String())
@@ -107,7 +110,10 @@ func TestCafeSearch(t *testing.T) {
 		}
 		assert.Len(t, cafe, v.wantCount)
 		for _, cf := range cafe {
-			assert.Contains(t, strings.ToLower(cf), strings.ToLower(v.search))
+			assert.Contains(t,
+				strings.ToLower(cf),
+				strings.ToLower(v.search),
+			)
 		}
 	}
 }
